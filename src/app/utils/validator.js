@@ -9,14 +9,15 @@ export function validator(data, config) {
                 } else statusValidate = data.trim() === "";
                 break;
             }
-            case "isEmail": {
-                const emailRegExp = /^\S+@\S+\.\S+$/g;
-                statusValidate = !emailRegExp.test(data);
+            case "isYear": {
+                const curYear = new Date().getFullYear();
+                statusValidate = !(curYear > data && curYear - data < 120);
                 break;
             }
-            case "isCapitalSymbol": {
-                const capitalRegExp = /[A-Z]+/g;
-                statusValidate = !capitalRegExp.test(data);
+            case "isUrl": {
+                const urlRegExp =
+                    /(^https?:\/\/)?[a-z0-9~_\-\.]+\.[a-z]{2,9}(\/|:|\?[!-~]*)?$/;
+                statusValidate = !urlRegExp.test(data);
                 break;
             }
             case "isContainDigit": {
